@@ -1,12 +1,8 @@
-    // Import the functions you need from the SDKs you need
+
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js";
     import { getDatabase , ref, set ,onValue } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
     const firebaseConfig = {
       apiKey: "AIzaSyBW1fqC3JnY9If0tvrssTpqL-2GRiJMHG0",
       authDomain: "testweb-4de8c.firebaseapp.com",
@@ -18,7 +14,6 @@
       measurementId: "G-R7JLW850QV"
     };
   
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const database = getDatabase(app);
@@ -35,14 +30,21 @@
 
     window.addEventListener("load" , ()=>{
       writeUserData("rupel","shubha","rup@g","asdasd" )
+      const db = getDatabase();
+      const starCountRef = ref(db, 'users/' );
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log(data)
+        document.getElementById("display").innerHTML = JSON.stringify(data)
+      });
     })
 
 
 
-    const db = getDatabase();
-    const starCountRef = ref(db, 'users/' );
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      console.log(data)
-      document.getElementById("display").innerHTML = JSON.stringify(data)
-    });
+    // const db = getDatabase();
+    // const starCountRef = ref(db, 'users/' );
+    // onValue(starCountRef, (snapshot) => {
+    //   const data = snapshot.val();
+    //   console.log(data)
+    //   document.getElementById("display").value = JSON.stringify(data)
+    // });
